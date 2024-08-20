@@ -1,6 +1,7 @@
 package com.usman.harrypotter.ui.characterlist
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,9 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -33,38 +37,62 @@ import com.usman.harrypotter.ui.model.CharacterUiModel
 fun CharacterListScreen(
     snackBarHostState: SnackbarHostState,
     padding: PaddingValues,
+    showSearchBar: Boolean,
+    searchText: String,
+    onSearchTextChanged: (String) -> Unit, // Callback to update search text
     viewModel: CharacterViewModel = hiltViewModel(),
     onCharacterClick: (CharacterUiModel) -> Unit
 ) {
     val characterUiState: CharacterUiState by viewModel.uiState.collectAsStateWithLifecycle()
-    // ... UI to display character list based on uiState
-    when (val uiState = characterUiState) {
-        is CharacterUiState.Success -> {
-            CharactersList(uiState, Modifier.padding(padding), onCharacterClick)
+
+    Column(modifier = Modifier.padding(padding)) {
+        if (showSearchBar) {
+            OutlinedTextField(
+                value = searchText,
+                onValueChange = onSearchTextChanged,
+                label = { Text("Search") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            )
         }
 
-        is CharacterUiState.Error -> {
-            LaunchedEffect(Unit) {
-                val result = snackBarHostState.showSnackbar(
-                    message = "Error: ${uiState.exception.message}",
-                    actionLabel = "Retry",
-                    duration = SnackbarDuration.Indefinite // Keep Snackbar visible until dismissed
-                )
-                if (result == SnackbarResult.ActionPerformed) {
-                    viewModel.getAllCharacters()// Retry fetch on Snackbar action
+        // ... UI to display character list based on uiState
+        when (val uiState = characterUiState) {
+            is CharacterUiState.Success -> {
+                val filteredCharacters = if (searchText.isBlank()) {
+                    uiState.characters
+                } else {
+                    uiState.characters.filter {
+                        it.name.contains(searchText, ignoreCase = true) || it.actor.contains(searchText, ignoreCase = true)
+                    }
                 }
+
+                CharactersList(filteredCharacters, onCharacterClick)
             }
 
-        }
+            is CharacterUiState.Error -> {
+                LaunchedEffect(Unit) {
+                    val result = snackBarHostState.showSnackbar(
+                        message = "Error: ${uiState.exception.message}",
+                        actionLabel = "Retry",
+                        duration = SnackbarDuration.Indefinite // Keep Snackbar visible until dismissed
+                    )
+                    if (result == SnackbarResult.ActionPerformed) {
+                        viewModel.getAllCharacters()// Retry fetch on Snackbar action
+                    }
+                }
 
-        is CharacterUiState.Loading -> {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(padding)
-                    .fillMaxSize()
-            ) {
-                items(10) {
-                    CharacterItemPlaceholder()
+            }
+
+            is CharacterUiState.Loading -> {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    items(10) {
+                        CharacterItemPlaceholder()
+                    }
                 }
             }
         }
@@ -73,15 +101,14 @@ fun CharacterListScreen(
 
 @Composable
 fun CharactersList(
-    uiState: CharacterUiState.Success,
-    modifier: Modifier,
+    characters: List<CharacterUiModel>,
     onCharacterClick: (CharacterUiModel) -> Unit
 ) {
     LazyColumn(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
     ) {
-        items(uiState.characters) { character ->
+        items(characters) { character ->
             CharacterItem(character) {
                 onCharacterClick(character)
             }
@@ -126,8 +153,8 @@ fun CharactersListPreview() {
             image = "https://example.com/hermione.jpg"
         )
     }
-    val uiState = CharacterUiState.Success(charactersList)
-    CharactersList(uiState, Modifier.padding(dimensionResource(id = R.dimen.padding_medium))) {
+
+    CharactersList(charactersList) {
 
     }
 }

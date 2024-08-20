@@ -3,6 +3,8 @@ package com.usman.harrypotter.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,12 +44,22 @@ fun HarryPorterCharactersApp(navController: NavHostController = rememberNavContr
     var characterName by remember { mutableStateOf<String>("") }
     val title = if(currentScreen == AppScreens.DETAIL) characterName else stringResource(currentScreen.title)
 
+    var showSearchBar by remember { mutableStateOf(false) }
+    var searchText by remember { mutableStateOf("") }
+
     Scaffold(
         topBar = {
             CharacterTopAppBar(
                 title = title,
                 canNavigateBack = canNavigateBack,
-                navigateUp = { navController.navigateUp() }
+                showSearchBar = showSearchBar,
+                navigateUp = { navController.navigateUp() },
+                onFilterIconClick = {
+                    showSearchBar = !showSearchBar
+                    if(!showSearchBar){
+                        searchText = ""
+                    }
+                }
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
@@ -55,7 +67,13 @@ fun HarryPorterCharactersApp(navController: NavHostController = rememberNavContr
     ) { innerPadding ->
         NavHost(navController = navController, startDestination = AppScreens.HOME.route) {
             composable(AppScreens.HOME.route) {
-                CharacterListScreen(snackBarHostState, innerPadding) { character ->
+                CharacterListScreen(
+                    snackBarHostState = snackBarHostState,
+                    padding = innerPadding,
+                    showSearchBar = showSearchBar,// Passing search state
+                    searchText = searchText, // Passing text to filter items.
+                    onSearchTextChanged = { searchText = it } // Callback to update search text
+                    ) { character ->    // Callback to handle list item click
                     navController.currentBackStackEntry?.savedStateHandle?.set(
                         key = DETAIL_NAV_KEY,
                         value = character
@@ -82,7 +100,9 @@ fun HarryPorterCharactersApp(navController: NavHostController = rememberNavContr
 fun CharacterTopAppBar(
     title: String,
     canNavigateBack: Boolean,
-    navigateUp: () -> Unit
+    showSearchBar: Boolean,
+    navigateUp: () -> Unit,
+    onFilterIconClick: () -> Unit
 ) {
     TopAppBar(
         title = { Text(title) },
@@ -92,6 +112,16 @@ fun CharacterTopAppBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.cd_back_button)
+                    )
+                }
+            }
+        },
+        actions = {
+            if (!canNavigateBack) { // Only show filter icon on home screen
+                IconButton(onClick = onFilterIconClick) {
+                    Icon(
+                        if (showSearchBar) Icons.Filled.Close else Icons.Filled.Search,
+                        contentDescription = if (showSearchBar) "Close Search" else "Search"
                     )
                 }
             }

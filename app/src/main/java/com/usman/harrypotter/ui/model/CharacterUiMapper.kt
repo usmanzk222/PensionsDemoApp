@@ -16,7 +16,7 @@ fun CharacterDomain.mapToUIModel(): CharacterUiModel {
     return CharacterUiModel(
         id = id,
         name = name,
-        actor = actor,
+        actor = actor.ifEmpty { "Unknown" },
         species = species,
         house = house,
         alive = if (alive) "Yes" else "No",

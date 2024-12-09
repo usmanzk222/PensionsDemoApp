@@ -1,25 +1,25 @@
 [versions]
 accompanistPlaceholderMaterial = "0.30.0"
-agp = "8.5.2"
+agp = "8.7.3"
 coilCompose = "2.2.2"
 converterGson = "2.9.0"
 gson = "2.10.1"
 hiltAndroid = "2.49"
 hiltNavigationCompose = "1.2.0"
-kotlin = "1.9.0"
+kotlin = "2.0.0"
 kotlinxCoroutinesTest = "1.7.3"
 ksp = "1.8.10-1.0.9"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.4"
-activityCompose = "1.9.1"
-composeBom = "2024.06.00"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.11.00"
 mockk = "1.13.2"
 retrofit = "2.9.0"
 roomRuntime = "2.6.1"
-lifecycleRuntimeComposeAndroid = "2.8.4"
+lifecycleRuntimeComposeAndroid = "2.8.7"
 coreKtxVersion = "1.6.1"
 junitKtx = "1.2.1"
 turbine = "1.0.0"
@@ -61,5 +61,6 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-google-devtools-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+#google-devtools-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

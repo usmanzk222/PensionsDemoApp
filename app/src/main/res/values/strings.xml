@@ -3,4 +3,7 @@
     <string name="home_title">Pensions</string>
     <string name="title_details">Pensions Details</string>
     <string name="cd_back_button">Back Button</string>
+    <string name="default_notification_channel_id">Pensions Notifications Id</string>
+    <string name="default_notification_channel_name">Pensions Notifications</string>
+    <string name="msg_permission_denied">Notifications won\'t work on this phone. Please go to the settings to enable notifications</string>
 </resources>

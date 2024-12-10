@@ -6,4 +6,12 @@
     <string name="default_notification_channel_id">Pensions Notifications Id</string>
     <string name="default_notification_channel_name">Pensions Notifications</string>
     <string name="msg_permission_denied">Notifications won\'t work on this phone. Please go to the settings to enable notifications</string>
+
+    <!-- App Name -->
+    <string name="app_name">Scottish Widows</string>
+
+    <!-- Landing Page -->
+    <string name="birthday_message_heading">Happy %1$s birthday, %2$s!</string>
+    <string name="birthday_message_body">When others celebrate your birthday, we care about how you just stepped towards your retirement.</string>
+    <string name="lost_pensions_button">Do you have lost pensions?</string>
 </resources>

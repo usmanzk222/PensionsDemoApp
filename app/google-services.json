@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "306577900904",
+    "project_id": "pensions-ebea0",
+    "storage_bucket": "pensions-ebea0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306577900904:android:e2906e5b74f16302a542dd",
+        "android_client_info": {
+          "package_name": "com.lbg.pensionsdemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQJw8hSXV2_REHHKUXikENJjyvSv5ByWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,16 +17,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lbg.pensionsdemo.R
+import com.lbg.pensionsdemo.ui.theme.SWButton
+import com.lbg.pensionsdemo.ui.theme.calculateAge
+import java.util.Calendar
 import com.lbg.pensionsdemo.ui.theme.LoadLottieAnimation
 import com.lbg.pensionsdemo.ui.theme.SWButton
-import com.usman.pensionsdemo.ui.theme.calculateAge
 import java.util.Date
 
 @Composable
 fun LandingPage(
-    navigateToLostPensionsScreen: () -> Unit,
     customerName: String,
     customerBirthdate: Date,
+    navigateToLostPensionsScreen: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -35,12 +37,7 @@ fun LandingPage(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        LoadLottieAnimation(
-            height = 400,
-            topPadding = 100,
-            animationId = R.raw.birthday_hat,
-            modifier = Modifier,
-        )
+        CakeAnimation(modifier = Modifier.fillMaxWidth())
         BirthdayMessage(
             ageString = calculateAge(
                 birthDate = customerBirthdate
@@ -50,6 +47,27 @@ fun LandingPage(
             onClick = navigateToLostPensionsScreen
         )
     }
+}
+
+@Composable
+fun CakeAnimation(modifier: Modifier) {
+    val preloaderLottieComposition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(
+            R.raw.birthday_hat
+        )
+    )
+
+    val preloaderProgress by animateLottieCompositionAsState(
+        preloaderLottieComposition,
+        iterations = LottieConstants.IterateForever
+    )
+
+    LottieAnimation(
+        composition = preloaderLottieComposition,
+        progress = preloaderProgress,
+        modifier = modifier.height(400.dp)
+            .padding(top = 100.dp)
+    )
 }
 
 @Composable
@@ -74,7 +92,7 @@ fun BirthdayMessage(ageString: String,  name: String, modifier: Modifier, onClic
         )
         Spacer(modifier = Modifier.weight(1f))
         SWButton(
-            onClick = { onClick },
+            onClick = onClick,
             buttonText = stringResource(R.string.lost_pensions_button),
         )
         Spacer(modifier = Modifier.height(40.dp))
@@ -85,8 +103,8 @@ fun BirthdayMessage(ageString: String,  name: String, modifier: Modifier, onClic
 @Composable
 fun LandingPagePreview() {
     LandingPage(
-        navigateToLostPensionsScreen = { },
         customerName = "Sarah",
-        customerBirthdate = TODO()
+        customerBirthdate = Calendar.getInstance().time,
+        navigateToLostPensionsScreen = { }
     )
 }

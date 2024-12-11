@@ -17,7 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.lbg.pensionsdemo.ui.PensionsDemoApp
 import com.lbg.pensionsdemo.ui.theme.PensionsDemoAppTheme
+import com.usman.pensionsdemo.ui.LandingPage
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Date
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -26,7 +28,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PensionsDemoAppTheme {
-                PensionsDemoApp()
+//                PensionsDemoApp(
+                LandingPage(
+                    navigateToLostPensionsScreen = { },
+                    customerName = "Sarah",
+                    customerBirthdate = Date(1998 - 1900, 0, 1)
+                )
             }
         }
 

@@ -1,4 +1,4 @@
-package com.usman.pensionsdemo.ui
+package com.lbg.pensionsdemo.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,15 +20,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.*
 import com.lbg.pensionsdemo.R
-import com.usman.pensionsdemo.ui.theme.SWButton
-import com.usman.pensionsdemo.ui.theme.calculateAge
+import com.lbg.pensionsdemo.ui.theme.SWButton
+import com.lbg.pensionsdemo.ui.theme.calculateAge
+import java.util.Calendar
 import java.util.Date
 
 @Composable
 fun LandingPage(
-    navigateToLostPensionsScreen: () -> Unit,
     customerName: String,
     customerBirthdate: Date,
+    navigateToLostPensionsScreen: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -92,7 +93,7 @@ fun BirthdayMessage(ageString: String,  name: String, modifier: Modifier, onClic
         )
         Spacer(modifier = Modifier.weight(1f))
         SWButton(
-            onClick = { onClick },
+            onClick = onClick,
             buttonText = stringResource(R.string.lost_pensions_button),
         )
         Spacer(modifier = Modifier.height(40.dp))
@@ -103,8 +104,8 @@ fun BirthdayMessage(ageString: String,  name: String, modifier: Modifier, onClic
 @Composable
 fun LandingPagePreview() {
     LandingPage(
-        navigateToLostPensionsScreen = { },
         customerName = "Sarah",
-        customerBirthdate = TODO()
+        customerBirthdate = Calendar.getInstance().time,
+        navigateToLostPensionsScreen = { }
     )
 }

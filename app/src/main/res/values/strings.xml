@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Scottish Widows</string>
-    <string name="home_title">Pensions</string>
+    <string name="title_home">Scottish Widows</string>
+    <string name="title_greetings">Greetings Panda</string>
     <string name="title_details">Pensions Details</string>
     <string name="cd_back_button">Back Button</string>
     <string name="default_notification_channel_id">Pensions Notifications Id</string>

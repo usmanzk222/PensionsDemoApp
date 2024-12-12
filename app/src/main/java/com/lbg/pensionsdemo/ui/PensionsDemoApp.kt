@@ -51,11 +51,7 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
 
             navigation( route = AppScreens.BINGO.route, startDestination = AppScreens.BINGO_HOME.route){
                 composable(AppScreens.BINGO_HOME.route) {
-                    GreetingsHome(
-                        customerName = "Usman",
-                        customerBirthdate = Date(1998 - 1900, 0, 1),
-                        navigateToLostPensionsScreen = { }
-                    )
+                    BingoScreen()
                 }
             }
         }

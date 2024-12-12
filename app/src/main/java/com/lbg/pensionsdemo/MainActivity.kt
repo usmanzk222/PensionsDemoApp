@@ -2,6 +2,7 @@ package com.lbg.pensionsdemo
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,27 +13,31 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.lbg.pensionsdemo.ui.LandingPage
+import com.lbg.pensionsdemo.ui.PensionsDemoApp
 import com.lbg.pensionsdemo.ui.theme.PensionsDemoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Date
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private var navigationTargetState by mutableStateOf<String?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        navigationTargetState = intent?.getStringExtra("NAVIGATION_TARGET")
+        Log.e("OnCreate: Notification", "data: $navigationTargetState")
+
         setContent {
             PensionsDemoAppTheme {
-//                PensionsDemoApp(
-                LandingPage(
-                    customerName = "Sarah",
-                    customerBirthdate = Date(1998 - 1900, 0, 1),
-                    navigateToLostPensionsScreen = { }
-                )
+                PensionsDemoApp(navigationTargetState)
             }
         }
 
@@ -59,6 +64,12 @@ class MainActivity : ComponentActivity() {
             Toast.makeText(this@MainActivity,
                 getString(R.string.msg_permission_denied), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        navigationTargetState = intent.getStringExtra("NAVIGATION_TARGET")
+        Log.e("onNewIntent: Notification", "data: $navigationTargetState")
     }
 
     private fun askNotificationPermission() {

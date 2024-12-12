@@ -5,11 +5,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.lbg.pensionsdemo.R
+import com.lbg.pensionsdemo.ui.theme.PrimaryButtonContainer
+import com.lbg.pensionsdemo.ui.theme.PrimaryButtonText
 
 @Composable
 fun SWButton(
@@ -20,8 +28,8 @@ fun SWButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Red,
-            contentColor = Color.White
+            containerColor = PrimaryButtonContainer,
+            contentColor = PrimaryButtonText
         ),
         modifier = modifier
             .padding(16.dp)
@@ -33,6 +41,43 @@ fun SWButton(
             modifier = Modifier.padding(vertical = 10.dp)
         )
     }
+}
+
+@Composable
+fun LoadLottieAnimation(
+    height: Int,
+    topPadding: Int,
+    animationId: Int,
+    modifier: Modifier
+) {
+    val preloaderLottieComposition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(
+            animationId
+        )
+    )
+
+    val preloaderProgress by animateLottieCompositionAsState(
+        preloaderLottieComposition,
+        iterations = LottieConstants.IterateForever
+    )
+
+    LottieAnimation(
+        composition = preloaderLottieComposition,
+        progress = preloaderProgress,
+        modifier = modifier.height(height.dp)
+            .padding(top = topPadding.dp)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewLoadLottieAnimation() {
+    LoadLottieAnimation(
+        400,
+        100,
+        R.raw.birthday_hat,
+        modifier = Modifier
+    )
 }
 
 @Preview(showBackground = true)

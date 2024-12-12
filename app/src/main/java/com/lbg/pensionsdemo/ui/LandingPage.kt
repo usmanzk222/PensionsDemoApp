@@ -1,15 +1,13 @@
-package com.usman.pensionsdemo.ui
+package com.lbg.pensionsdemo.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,8 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.airbnb.lottie.compose.*
 import com.lbg.pensionsdemo.R
+import com.usman.pensionsdemo.ui.theme.LoadLottieAnimation
 import com.usman.pensionsdemo.ui.theme.SWButton
 import com.usman.pensionsdemo.ui.theme.calculateAge
 import java.util.Date
@@ -37,7 +35,12 @@ fun LandingPage(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        CakeAnimation(modifier = Modifier.fillMaxWidth())
+        LoadLottieAnimation(
+            height = 400,
+            topPadding = 100,
+            animationId = R.raw.birthday_hat,
+            modifier = Modifier,
+        )
         BirthdayMessage(
             ageString = calculateAge(
                 birthDate = customerBirthdate
@@ -47,27 +50,6 @@ fun LandingPage(
             onClick = navigateToLostPensionsScreen
         )
     }
-}
-
-@Composable
-fun CakeAnimation(modifier: Modifier) {
-    val preloaderLottieComposition by rememberLottieComposition(
-        LottieCompositionSpec.RawRes(
-            R.raw.birthday_hat
-        )
-    )
-
-    val preloaderProgress by animateLottieCompositionAsState(
-        preloaderLottieComposition,
-        iterations = LottieConstants.IterateForever
-    )
-
-    LottieAnimation(
-        composition = preloaderLottieComposition,
-        progress = preloaderProgress,
-        modifier = modifier.height(400.dp)
-            .padding(top = 100.dp)
-    )
 }
 
 @Composable

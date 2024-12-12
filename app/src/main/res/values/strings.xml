@@ -7,8 +7,16 @@
     <string name="default_notification_channel_name">Pensions Notifications</string>
     <string name="msg_permission_denied">Notifications won\'t work on this phone. Please go to the settings to enable notifications</string>
 
-    <!-- Landing Page -->
+    <!-- Landing Screen -->
     <string name="birthday_message_heading">Happy %1$s birthday, %2$s!</string>
     <string name="birthday_message_body">When others celebrate your birthday, we care about how you just stepped towards your retirement.</string>
     <string name="lost_pensions_button">Do you have lost pensions?</string>
+
+    <!-- Rewards Screen -->
+    <string name="got_it_button">Got it!</string>
+    <string name="reward_screen_heading">Well done on learning more\non pension consolidation!</string>
+    <string name="reward_screen_description">We reward you for taking control of your\nTomorrow with personalised rewards.</string>
+    <string name="w">W</string>
+    <string name="add_twenty">+20!</string>
+
 </resources>

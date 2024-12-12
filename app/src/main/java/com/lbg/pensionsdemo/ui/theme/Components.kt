@@ -1,4 +1,4 @@
-package com.usman.pensionsdemo.ui.theme
+package com.lbg.pensionsdemo.ui.theme
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -16,8 +17,6 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.lbg.pensionsdemo.R
-import com.lbg.pensionsdemo.ui.theme.PrimaryButtonContainer
-import com.lbg.pensionsdemo.ui.theme.PrimaryButtonText
 
 @Composable
 fun SWButton(
@@ -38,6 +37,7 @@ fun SWButton(
         Text(
             text = buttonText,
             fontSize = 16.sp,
+            color = Color(0xFFFFFFFF),
             modifier = Modifier.padding(vertical = 10.dp)
         )
     }

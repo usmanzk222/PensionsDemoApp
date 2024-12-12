@@ -17,8 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lbg.pensionsdemo.R
-import com.usman.pensionsdemo.ui.theme.LoadLottieAnimation
-import com.usman.pensionsdemo.ui.theme.SWButton
+import com.lbg.pensionsdemo.ui.theme.LoadLottieAnimation
+import com.lbg.pensionsdemo.ui.theme.SWButton
 import com.usman.pensionsdemo.ui.theme.calculateAge
 import java.util.Date
 

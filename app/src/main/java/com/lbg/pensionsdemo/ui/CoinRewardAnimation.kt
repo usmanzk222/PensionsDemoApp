@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -44,45 +45,50 @@ fun RewardCoinCardAnimation() {
     var animationStarted by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(
         targetValue = if (animationStarted) 1f else 0f,
-        animationSpec = tween(durationMillis = 500)
+        animationSpec = tween(durationMillis = 1000),
+        label = ""
     )
-    val offsetYInitial = -200.dp
-    var offsetY by remember { mutableStateOf(offsetYInitial) }
+
+    // Start within the box
+    var offsetY by remember { mutableStateOf(0.dp) }
     val trailCards = remember { mutableStateListOf<Float>() }
 
     LaunchedEffect(key1 = true) {
-        delay(500)
+        delay(1000)
         animationStarted = true
 
-        while (offsetY.value < 0) {
-            offsetY += 2.dp
-            trailCards.add(offsetY.value) // Add current offset to trailCards
-            delay(80)
-
-            // Remove trail cards that are off-screen
-            trailCards.removeAll { it < offsetYInitial.value }
+        // Animate within the box
+        for (i in 0..5) {
+            offsetY = if (i % 2 == 0) (-20).dp else 0.dp
+            trailCards.add(offsetY.value)
+            delay(200)
+            trailCards.removeAll { it != offsetY.value }
         }
 
-        // Stop creating trail cards and clear existing ones
+        // Final position
+        offsetY = 0.dp
         trailCards.clear()
-        offsetY = 0.dp // Set final position
     }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .size(250.dp)
+            .clipToBounds()
+            .padding(32.dp),
         contentAlignment = Alignment.Center
     ) {
-        CoinRewardCard( // Main card
+        CoinRewardCard(
             modifier = Modifier
                 .offset(y = offsetY)
                 .scale(scale)
         )
 
-        trailCards.forEach { trailOffsetY -> // Trail cards
+        trailCards.forEach { trailOffsetY ->
             CoinRewardCard(
                 modifier = Modifier
                     .offset(y = trailOffsetY.dp)
-                    .alpha(1 - (trailOffsetY / offsetYInitial.value))
+                    .alpha(if (trailOffsetY != 0f) 0.5f else 1f)
                     .scale(scale)
             )
         }

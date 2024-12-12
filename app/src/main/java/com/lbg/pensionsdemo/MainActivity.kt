@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.lbg.pensionsdemo.ui.BingoScreen
 import com.lbg.pensionsdemo.ui.theme.PensionsDemoAppTheme
 import com.lbg.pensionsdemo.ui.LandingPage
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,12 +28,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             PensionsDemoAppTheme {
 //                PensionsDemoApp(
-//                LandingPage(
-//                    navigateToLostPensionsScreen = { },
-//                    customerName = "Sarah",
-//                    customerBirthdate = Date(1998 - 1900, 0, 1)
-//                )
-                BingoScreen()
+                LandingPage(
+                    navigateToLostPensionsScreen = { },
+                    customerName = "Sarah",
+                    customerBirthdate = Date(1998 - 1900, 0, 1)
+                )
             }
         }
 

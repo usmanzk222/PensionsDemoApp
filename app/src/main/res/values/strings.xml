@@ -20,4 +20,20 @@
     <string name="w">W</string>
     <string name="add_twenty">+20!</string>
 
+    <!-- Bingo Screen -->
+    <string name="personalised_next_steps_title">Our personalised\nnext steps for you.</string>
+    <string name="crossed">Crossed!</string>
+    <string name="why_consolidating">Why consolidating\nyour pots?</string>
+    <string name="connect_other_accounts">Connect other\naccounts</string>
+    <string name="connect_other_pensions">Transfer your other\npensions in</string>
+    <string name="keep_profile_updated">Keep your profile\nupdated</string>
+    <string name="what_is_WIR">What is Women\nin Retirement</string>
+    <string name="life_insurance_for_me">Would life insurance\nbe for me?</string>
+    <string name="save_or_invest">Should I save or\ninvest?</string>
+    <string name="pet_insurance_due">Your pet insurance\nis due to renew</string>
+    <string name="compound_interest">What is compound\ninterest?</string>
+    <string name="one_away_from_unlocking">One away from unlocking your Bingo reward!</string>
+    <string name="user_points">160</string>
+    <string name="completed">Completed</string>
+
 </resources>

@@ -15,3 +15,4 @@ val PrimaryButtonText = Color.Black
 
 val RewardCoinCard = Color(0xFFFBB523)
 val RewardCoinCardLighter = Color(0xFFFFEEB2)
+val TickCircle = Color(0xFF7BC235)

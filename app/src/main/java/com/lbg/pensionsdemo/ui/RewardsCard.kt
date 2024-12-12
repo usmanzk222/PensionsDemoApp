@@ -15,8 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lbg.pensionsdemo.R
@@ -26,7 +28,8 @@ import com.lbg.pensionsdemo.ui.theme.SWButton
 @Composable
 fun RewardsCard(modifier: Modifier) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .shadow(8.dp, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp)),
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp),
     ) {
         Column(
@@ -39,6 +42,7 @@ fun RewardsCard(modifier: Modifier) {
             Text(
                 text = stringResource(R.string.reward_screen_heading),
                 style = MaterialTheme.typography.headlineLarge,
+                textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -46,13 +50,14 @@ fun RewardsCard(modifier: Modifier) {
                 style = MaterialTheme.typography.bodyMedium,
             )
 
-            LoadLottieAnimation(320, 24, R.raw.piggy_bank, Modifier)
+            LoadLottieAnimation(350, 24, R.raw.piggy_bank, Modifier)
 
-            Box(modifier = Modifier.size(width = 200.dp, height = 100.dp)) {
+            Box(modifier = Modifier.size(width = 250.dp, height = 120.dp)) {
                 RewardCoinCardAnimation()
             }
 
             SWButton(onClick = {}, buttonText = stringResource(R.string.got_it_button))
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }

@@ -106,7 +106,7 @@ fun BirthdayMessage(ageString: String, name: String, modifier: Modifier, onClick
 fun LandingPagePreview() {
     GreetingsHome(
         customerName = "Sarah",
-        customerBirthdate = Calendar.getInstance().time,
+        customerBirthdate = Date(2002 - 1900, 0, 1),
         navigateToLostPensionsScreen = { }
     )
 }

@@ -2,6 +2,7 @@ package com.lbg.pensionsdemo.ui
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,12 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.lbg.pensionsdemo.R
 import com.lbg.pensionsdemo.ui.theme.RewardCoinCard
 import com.lbg.pensionsdemo.ui.theme.RewardCoinCardLighter
@@ -79,6 +82,7 @@ fun RewardCoinCardAnimation() {
         contentAlignment = Alignment.Center
     ) {
         CoinRewardCard(
+            isProfileReward = false,
             modifier = Modifier
                 .offset(y = offsetY)
                 .scale(scale)
@@ -86,6 +90,7 @@ fun RewardCoinCardAnimation() {
 
         trailCards.forEach { trailOffsetY ->
             CoinRewardCard(
+                isProfileReward = false,
                 modifier = Modifier
                     .offset(y = trailOffsetY.dp)
                     .alpha(if (trailOffsetY != 0f) 0.5f else 1f)
@@ -96,7 +101,7 @@ fun RewardCoinCardAnimation() {
 }
 
 @Composable
-fun CoinRewardCard(modifier: Modifier) {
+fun CoinRewardCard(isProfileReward: Boolean, modifier: Modifier) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(13.dp),
@@ -104,21 +109,52 @@ fun CoinRewardCard(modifier: Modifier) {
     ) {
         Row(
             modifier = Modifier
-                .padding(vertical = 5.dp, horizontal = 9.dp),
+                .padding(start = 9.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            WCircle()
-
-            Spacer(modifier = Modifier.width(9.dp))
-
-            Text(
-                text = stringResource(R.string.add_twenty),
-                style = TextStyle(
-                    color = RewardCoinCard,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Bold
+            Row(
+                modifier = Modifier
+                    .padding(vertical = 5.dp),
+            ) {
+                WCircle()
+                Spacer(modifier = Modifier.width(9.dp))
+                Text(
+                    text = stringResource(
+                        if (isProfileReward) R.string.user_points else R.string.add_twenty
+                    ),
+                    style = TextStyle(
+                        color = RewardCoinCard,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 )
+            }
+            Spacer(modifier = Modifier.width(9.dp))
+            if (isProfileReward) {
+                UserProfileCircle()
+            }
+        }
+    }
+}
+
+@Composable
+fun UserProfileCircle() {
+    Card(
+        modifier = Modifier.size(26.dp),
+        shape = CircleShape,
+        colors = CardDefaults.cardColors(containerColor = RewardCoinCard),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(R.drawable.eyeing_emoji), //todo switch to octopus icon
+                contentDescription = "Profile Image",
+                modifier = Modifier.padding(2.dp)
             )
         }
     }
@@ -161,5 +197,11 @@ fun PreviewWCircle() {
 @Preview
 @Composable
 fun PreviewCoinRewardCard() {
-    CoinRewardCard(modifier = Modifier)
+    CoinRewardCard(isProfileReward = false, modifier = Modifier)
+}
+
+@Preview
+@Composable
+fun PreviewCoinRewardCardWithProfile() {
+    CoinRewardCard(isProfileReward = true, modifier = Modifier)
 }

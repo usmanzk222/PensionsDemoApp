@@ -2,10 +2,8 @@ package com.lbg.pensionsdemo.data.di.modules.data
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.lbg.pensionsdemo.data.remote.HpApiService
-import com.lbg.pensionsdemo.data.remote.adapters.HouseTypeAdapter
 import com.lbg.pensionsdemo.data.di.BaseUrl
-import com.lbg.pensionsdemo.domain.model.House
+import com.lbg.pensionsdemo.data.remote.HpApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,15 +20,13 @@ class NetworkModule {
     @Provides
     @BaseUrl
     fun provideBaseUrl(): String {
-        return "https://hp-api.onrender.com/"
+        return "https://heavily-amused-monkey.ngrok-free.app/v1/"
     }
 
     @Provides
     @Singleton
     fun provideGson(): Gson {
-        return GsonBuilder()
-            .registerTypeAdapter(House::class.java, HouseTypeAdapter())
-            .create()
+        return GsonBuilder().create()
     }
 
     @Provides

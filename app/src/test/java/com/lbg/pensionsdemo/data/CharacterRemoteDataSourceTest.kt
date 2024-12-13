@@ -1,9 +1,10 @@
 package com.lbg.pensionsdemo.data
 
-import com.lbg.pensionsdemo.data.remote.PensionsRemoteDataSource
+import com.lbg.pensionsdemo.data.remote.UserRemoteDataSource
 import com.lbg.pensionsdemo.data.remote.HpApiService
-import com.lbg.pensionsdemo.data.remote.IPensionsRemoteDataSource
-import com.lbg.pensionsdemo.testHelper.CharactersTestData
+import com.lbg.pensionsdemo.data.remote.IUserRemoteDataSource
+import com.lbg.pensionsdemo.data.remote.model.UserResponse
+import com.lbg.pensionsdemo.testHelper.UserTestData
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -14,44 +15,44 @@ import org.junit.Before
 import org.junit.Test
 
 
-class IPensionsRemoteDataSourceTest {
+class IUserRemoteDataSourceTest {
 
     private lateinit var characterService: HpApiService
-    private lateinit var characterRemoteDataSource: IPensionsRemoteDataSource
+    private lateinit var characterRemoteDataSource: IUserRemoteDataSource
 
     @Before
     fun setup() {
         characterService = mockk()
-        characterRemoteDataSource = PensionsRemoteDataSource(characterService)
+        characterRemoteDataSource = UserRemoteDataSource(characterService)
     }
 
     @Test
     fun `getAllCharacters returns success result when API call is successful`() = runTest {
         // Mock API response
-        val mockCharacters = (0..5).map (CharactersTestData::getCharacter)
-        coEvery { characterService.getPensions() } returns mockCharacters
+        val mockCharacters = (0..5).map (UserTestData::getUser)
+        coEvery { characterService.getUser() } returns UserResponse(success = true, mockCharacters.first(), "Success!")
 
         // Call the function
-        val result = characterRemoteDataSource.getPensions()
+        val result = characterRemoteDataSource.getUser()
 
         // Verify the result
         assertTrue(result.isSuccess)
         assertEquals(mockCharacters, result.getOrNull())
-        coVerify(exactly = 1) { characterService.getPensions() }
+        coVerify(exactly = 1) { characterService.getUser() }
     }
 
     @Test
     fun `getAllCharacters returns failure result when API call throws exception`() = runTest {
         // Mock API exception
         val exception = Exception("Network error")
-        coEvery { characterService.getPensions() } throws exception
+        coEvery { characterService.getUser() } throws exception
 
         // Call the function
-        val result = characterRemoteDataSource.getPensions()
+        val result = characterRemoteDataSource.getUser()
 
         // Verify the result
         assertTrue(result.isFailure)
         assertEquals(exception, result.exceptionOrNull())
-        coVerify(exactly = 1) { characterService.getPensions() }
+        coVerify(exactly = 1) { characterService.getUser() }
     }
 }

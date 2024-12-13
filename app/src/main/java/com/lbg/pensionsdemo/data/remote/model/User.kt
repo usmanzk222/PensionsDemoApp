@@ -24,7 +24,7 @@ data class User(
 
 
 fun User.toUserEntity(): UserEntity {
-    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     val formattedDOB = if (!dob.isNullOrEmpty()) {
         dateFormat.parse(dob)?.time
     } else {

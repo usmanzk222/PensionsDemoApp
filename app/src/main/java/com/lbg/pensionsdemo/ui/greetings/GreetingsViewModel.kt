@@ -26,10 +26,9 @@ class GreetingsViewModel @Inject constructor(
     fun getUser() {
         viewModelScope.launch {
             _uiState.value = GreetingsUIState.Loading
-            try {
+            _uiState.value = try {
                 val domainUser = getUserUseCase()
-
-                _uiState.value = if (domainUser != null){
+                 if (domainUser != null){
                     GreetingsUIState.Success(domainUser.mapToUIModel())
                 }else{
                     GreetingsUIState.Error(Exception("User not found"))

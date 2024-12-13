@@ -9,5 +9,6 @@ enum class AppScreens(val route: String, @StringRes val title: Int) {
     BINGO("bingoRoute", title = R.string.title_greetings),
 
     GREETINGS_HOME("greetingsHome", title = R.string.title_greetings),
-    BINGO_HOME("bingoHome", title = R.string.title_details)
+    BINGO_HOME("bingoHome", title = R.string.title_details),
+    BINGO_BOARD("bingoBoard", title = R.string.title_details)
 }

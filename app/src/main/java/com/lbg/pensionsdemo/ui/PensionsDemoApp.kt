@@ -19,7 +19,10 @@ import androidx.navigation.compose.rememberNavController
 import com.lbg.pensionsdemo.ui.greetings.GreetingsHome
 
 @Composable
-fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController = rememberNavController()) {
+fun PensionsDemoApp(
+    navigationTarget: String?,
+    navController: NavHostController = rememberNavController()
+) {
     val snackBarHostState = remember { SnackbarHostState() }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val navigationTargetState by remember { mutableStateOf(navigationTarget) }
@@ -36,37 +39,55 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = AppScreens.LANDING.route) {
             composable(AppScreens.LANDING.route) {
-              //  LandingPage(paddingValues)
-                BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {}, false)
+                LandingPage(paddingValues)
             }
 
-            navigation( route = AppScreens.GREETINGS.route, startDestination = AppScreens.GREETINGS_HOME.route){
+            navigation(
+                route = AppScreens.GREETINGS.route,
+                startDestination = AppScreens.GREETINGS_HOME.route
+            ) {
                 composable(AppScreens.GREETINGS_HOME.route) {
                     GreetingsHome(
                         snackBarHostState,
-                        padding = paddingValues
-                    ){
-                        // navigate to lost pension screen
+                        padding = paddingValues,
+                        navigateToLostPensionsScreen = { }
+                    ) {
+                        navController.navigateToHome(true)
                     }
                 }
             }
 
-            navigation( route = AppScreens.BINGO.route, startDestination = AppScreens.BINGO_HOME.route){
+            navigation(
+                route = AppScreens.BINGO.route,
+                startDestination = AppScreens.BINGO_HOME.route
+            ) {
                 composable(AppScreens.BINGO_HOME.route) {
-                    BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {},
-                        isRewardCardVisible = true
-                    )
+                    BingoScreen(isRewardCardVisible = true, navigateToBingoCellScreen = {}) {
+                        navController.navigateToHome(true)
+                    }
+                    composable(route = AppScreens.BINGO_BOARD.route) {
+                        BingoScreen(isRewardCardVisible = false, navigateToBingoCellScreen = {}) {
+                            navController.navigate(AppScreens.LANDING.route)
+                        }
+                    }
                 }
             }
+
         }
 
-    }
-
-    LaunchedEffect(navigationTargetState) {
-        navigationTargetState?.let { target ->
-            if(AppScreens.entries.any { it.route == target })
-                navController.navigate(target)
+        LaunchedEffect(navigationTargetState) {
+            navigationTargetState?.let { target ->
+                if (AppScreens.entries.any { it.route == target })
+                    navController.navigate(target)
+            }
         }
     }
+}
 
+fun NavHostController.navigateToHome(popBackStack: Boolean){
+    navigate(AppScreens.LANDING.route){
+        popUpTo(AppScreens.LANDING.route){
+            inclusive = popBackStack
+        }
+    }
 }

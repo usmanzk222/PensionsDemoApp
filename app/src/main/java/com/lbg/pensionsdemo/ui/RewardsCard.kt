@@ -26,7 +26,8 @@ import com.lbg.pensionsdemo.ui.theme.LoadLottieAnimation
 import com.lbg.pensionsdemo.ui.theme.SWButton
 
 @Composable
-fun RewardsCard(modifier: Modifier) {
+fun RewardsCard(modifier: Modifier,
+                onGotItClick: () -> Unit) {
     Card(
         modifier = modifier
             .shadow(8.dp, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp)),
@@ -56,7 +57,7 @@ fun RewardsCard(modifier: Modifier) {
                 RewardCoinCardAnimation()
             }
 
-            SWButton(onClick = {}, buttonText = stringResource(R.string.got_it_button))
+            SWButton(onClick = onGotItClick, buttonText = stringResource(R.string.got_it_button))
             Spacer(modifier = Modifier.height(60.dp))
         }
     }
@@ -65,5 +66,5 @@ fun RewardsCard(modifier: Modifier) {
 @Preview(showSystemUi = false)
 @Composable
 fun PreviewLargeToastScreen() {
-    RewardsCard(modifier = Modifier)
+    RewardsCard(modifier = Modifier) {}
 }

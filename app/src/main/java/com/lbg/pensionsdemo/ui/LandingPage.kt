@@ -21,7 +21,7 @@ fun LandingPage(paddingValues: PaddingValues) {
         contentDescription = "Home background",
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White)
+            .background(color = Color(0xFFFAFAFA))
             .padding(paddingValues),
         contentScale = ContentScale.Crop
     )

@@ -12,6 +12,7 @@
     <string name="birthday_message_heading">Happy %1$s birthday, %2$s!</string>
     <string name="birthday_message_body">When others celebrate your birthday, we care about how you just stepped towards your retirement.</string>
     <string name="lost_pensions_button">Do you have lost pensions?</string>
+    <string name="not_now">Not now</string>
 
     <!-- Rewards Screen -->
     <string name="got_it_button">Got it!</string>

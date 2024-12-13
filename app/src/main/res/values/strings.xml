@@ -1,6 +1,39 @@
 <resources>
-    <string name="app_name">Pensions</string>
-    <string name="home_title">Pensions</string>
+    <string name="app_name">Scottish Widows</string>
+    <string name="title_home">Scottish Widows</string>
+    <string name="title_greetings">Greetings Panda</string>
     <string name="title_details">Pensions Details</string>
     <string name="cd_back_button">Back Button</string>
+    <string name="default_notification_channel_id">Pensions Notifications Id</string>
+    <string name="default_notification_channel_name">Pensions Notifications</string>
+    <string name="msg_permission_denied">Notifications won\'t work on this phone. Please go to the settings to enable notifications</string>
+
+    <!-- Landing Screen -->
+    <string name="birthday_message_heading">Happy %1$s birthday, %2$s!</string>
+    <string name="birthday_message_body">When others celebrate your birthday, we care about how you just stepped towards your retirement.</string>
+    <string name="lost_pensions_button">Do you have lost pensions?</string>
+
+    <!-- Rewards Screen -->
+    <string name="got_it_button">Got it!</string>
+    <string name="reward_screen_heading">Well done on learning more\non pension consolidation!</string>
+    <string name="reward_screen_description">We reward you for taking control of your\nTomorrow with personalised rewards.</string>
+    <string name="w">W</string>
+    <string name="add_twenty">+20!</string>
+
+    <!-- Bingo Screen -->
+    <string name="personalised_next_steps_title">Our personalised\nnext steps for you.</string>
+    <string name="crossed">Crossed!</string>
+    <string name="why_consolidating">Why consolidating\nyour pots?</string>
+    <string name="connect_other_accounts">Connect other\naccounts</string>
+    <string name="connect_other_pensions">Transfer your other\npensions in</string>
+    <string name="keep_profile_updated">Keep your profile\nupdated</string>
+    <string name="what_is_WIR">What is Women\nin Retirement</string>
+    <string name="life_insurance_for_me">Would life insurance\nbe for me?</string>
+    <string name="save_or_invest">Should I save or\ninvest?</string>
+    <string name="pet_insurance_due">Your pet insurance\nis due to renew</string>
+    <string name="compound_interest">What is compound\ninterest?</string>
+    <string name="one_away_from_unlocking">One away from unlocking your Bingo reward!</string>
+    <string name="user_points">160</string>
+    <string name="completed">Completed</string>
+
 </resources>

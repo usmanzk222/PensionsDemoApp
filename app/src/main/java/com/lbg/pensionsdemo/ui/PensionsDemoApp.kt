@@ -36,7 +36,8 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = AppScreens.LANDING.route) {
             composable(AppScreens.LANDING.route) {
-                LandingPage(paddingValues)
+              //  LandingPage(paddingValues)
+                BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {}, false)
             }
 
             navigation( route = AppScreens.GREETINGS.route, startDestination = AppScreens.GREETINGS_HOME.route){
@@ -51,7 +52,9 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
 
             navigation( route = AppScreens.BINGO.route, startDestination = AppScreens.BINGO_HOME.route){
                 composable(AppScreens.BINGO_HOME.route) {
-                    BingoScreen()
+                    BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {},
+                        isRewardCardVisible = true
+                    )
                 }
             }
         }

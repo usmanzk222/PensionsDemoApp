@@ -22,10 +22,16 @@ val Typography = Typography(
         fontFamily = FontFamily.Default,
         color = Color(0xFF000000),
         fontWeight = FontWeight(510),
-        textAlign = TextAlign.Center,
     ),
     bodyMedium = TextStyle(
         fontSize = 16.sp,
+        fontFamily = FontFamily.Default,
+        color = Color(0xFF000000),
+        fontWeight = FontWeight(400),
+        textAlign = TextAlign.Center,
+    ),
+    bodySmall = TextStyle(
+        fontSize = 10.sp,
         fontFamily = FontFamily.Default,
         color = Color(0xFF000000),
         fontWeight = FontWeight(400),

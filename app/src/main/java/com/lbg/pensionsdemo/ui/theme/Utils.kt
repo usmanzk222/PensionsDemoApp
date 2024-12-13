@@ -10,5 +10,18 @@ fun calculateAge(birthDate: Date): String{
     val currentDate = LocalDate.now()
 
     val period = Period.between(birthLocalDate, currentDate)
-    return "${period.years}th"
+    return "${period.years}${getAgeSuffix(period.years)}"
+}
+
+fun getAgeSuffix(number: Int): String {
+    val lastDigit = number % 10
+    val lastTwoDigits = number % 100
+
+    return when {
+        lastTwoDigits in 11..13 -> "th"
+        lastDigit == 1 -> "st"
+        lastDigit == 2 -> "nd"
+        lastDigit == 3 -> "rd"
+        else -> "th"
+    }
 }

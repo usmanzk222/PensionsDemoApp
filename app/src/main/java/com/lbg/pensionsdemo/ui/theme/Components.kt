@@ -3,6 +3,9 @@ package com.lbg.pensionsdemo.ui.theme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -71,8 +74,9 @@ fun LoadLottieAnimation(
 
     LottieAnimation(
         composition = preloaderLottieComposition,
-        progress = preloaderProgress,
-        modifier = modifier.height(height.dp)
+        progress = { preloaderProgress },
+        modifier = modifier
+            .height(height.dp)
             .padding(top = topPadding.dp)
     )
 }

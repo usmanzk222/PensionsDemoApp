@@ -1,12 +1,10 @@
 package com.lbg.pensionsdemo.domain.usecase
 
-import app.cash.turbine.test
-import com.lbg.pensionsdemo.data.local.entity.toCharacterDomain
-import com.lbg.pensionsdemo.data.repository.IPensionsRepository
-import com.lbg.pensionsdemo.testHelper.CharactersTestData
-import io.mockk.every
+import com.lbg.pensionsdemo.data.local.entity.toUserDomain
+import com.lbg.pensionsdemo.data.repository.IUsersRepository
+import com.lbg.pensionsdemo.testHelper.UserTestData
+import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -15,29 +13,25 @@ import org.junit.Test
 
 class GetAllCharactersUseCaseTest {
 
-    private lateinit var getAllCharactersUseCase: PensionsUseCase
-    private val mockCharacterRepository = mockk<IPensionsRepository>()
+    private lateinit var getAllCharactersUseCase: GetUserUseCase
+    private val mockCharacterRepository = mockk<IUsersRepository>()
 
     @Before
     fun setup() {
-        getAllCharactersUseCase = PensionsUseCase(mockCharacterRepository)
+        getAllCharactersUseCase = GetUserUseCase(mockCharacterRepository)
     }
 
     @Test
     fun `invoke returns flow of characters from repository`() = runBlocking {
         // Arrange
-        val characters = CharactersTestData.getCharactersListFromLocal().map { it.toCharacterDomain() }
-        every { mockCharacterRepository.getPensions() } returns flowOf(
-            Result.success(
-                characters
-            )
-        )
+        val characters = UserTestData.getUsersListFromLocal().map { it.toUserDomain() }
+        coEvery { mockCharacterRepository.getUser() } returns characters.first()
+
 
         // Act
-        getAllCharactersUseCase().test {
-            // Assert
-            assertEquals(Result.success(characters), awaitItem())
-            cancelAndIgnoreRemainingEvents()
-        }
+        val result = getAllCharactersUseCase()
+
+        // Assert
+        assertEquals(Result.success(characters), result)
     }
 }

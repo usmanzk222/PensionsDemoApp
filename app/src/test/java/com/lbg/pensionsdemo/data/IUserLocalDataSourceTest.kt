@@ -1,15 +1,14 @@
 package com.lbg.pensionsdemo.data
 
-import com.lbg.pensionsdemo.data.local.IPensionsLocalDataSource
-import com.lbg.pensionsdemo.data.local.PensionsLocalDataSource
+import com.lbg.pensionsdemo.data.local.IUserLocalDataSource
+import com.lbg.pensionsdemo.data.local.UserLocalDataSource
 import com.lbg.pensionsdemo.data.local.database.PensionsDao
-import com.lbg.pensionsdemo.data.local.entity.CharacterEntity
-import com.lbg.pensionsdemo.data.remote.model.toCharacterEntity
-import com.lbg.pensionsdemo.testHelper.CharactersTestData
+import com.lbg.pensionsdemo.data.local.entity.UserEntity
+import com.lbg.pensionsdemo.data.remote.model.toUserEntity
+import com.lbg.pensionsdemo.testHelper.UserTestData
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -17,24 +16,24 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
-class IPensionsLocalDataSourceTest {
+class IUserLocalDataSourceTest {
 
     private val characterDao = mockk<PensionsDao>()
-    private lateinit var characterLocalDataSource: IPensionsLocalDataSource
+    private lateinit var characterLocalDataSource: IUserLocalDataSource
 
     @Before
     fun setup() {
-        characterLocalDataSource = PensionsLocalDataSource(characterDao)
+        characterLocalDataSource = UserLocalDataSource(characterDao)
     }
 
     @Test
     fun `getAllCharacters returns all characters from the database`() = runTest {
         // Insert some test characters
-        val mockCharacters: List<CharacterEntity> = (0..5).map (CharactersTestData::getCharacter).map { it.toCharacterEntity() }
+        val mockCharacters: List<UserEntity> = (0..5).map (UserTestData::getUser).map { it.toUserEntity() }
         every { characterDao.getAllCharacters() } returns flowOf(mockCharacters)
 
         // Get characters from the data source
-        val characters = characterLocalDataSource.getAllCharacters().first()
+        val characters = characterLocalDataSource.getUser()
 
         // Verify the result
         assertEquals(mockCharacters, characters)
@@ -43,11 +42,11 @@ class IPensionsLocalDataSourceTest {
     @Test
     fun `getCharacterById returns the correct character for a given ID`() = runTest {
         // Insert a test character
-        val testCharacter = CharactersTestData.getCharacter(0).toCharacterEntity()
+        val testCharacter = UserTestData.getUser(0).toUserEntity()
         coEvery { characterDao.getCharacterById(testCharacter.id) } returns testCharacter
 
         // Get the character by ID
-        val character = characterLocalDataSource.getCharacterById(testCharacter.id)
+        val character = characterLocalDataSource.getUser()
 
         // Verify the result
         assertNotNull(character)

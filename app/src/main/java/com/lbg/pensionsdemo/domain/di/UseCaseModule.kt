@@ -1,7 +1,7 @@
 package com.lbg.pensionsdemo.domain.di
 
-import com.lbg.pensionsdemo.domain.usecase.IPensionsUseCase
-import com.lbg.pensionsdemo.domain.usecase.PensionsUseCase
+import com.lbg.pensionsdemo.domain.usecase.GetUserUseCase
+import com.lbg.pensionsdemo.domain.usecase.IGetUserUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,5 +12,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class UseCaseModule {
 
     @Binds
-    abstract fun provideGetAllCharactersUseCase(useCase: PensionsUseCase): IPensionsUseCase
+    abstract fun provideGetAllCharactersUseCase(useCase: GetUserUseCase): IGetUserUseCase
 }

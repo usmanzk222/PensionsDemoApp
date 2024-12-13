@@ -6,26 +6,26 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.lbg.pensionsdemo.data.local.entity.CharacterEntity
+import com.lbg.pensionsdemo.data.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PensionsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(character: CharacterEntity)
+    suspend fun insert(character: UserEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(characters: List<CharacterEntity>)
+    suspend fun insertAll(characters: List<UserEntity>)
 
     @Update
-    suspend fun update(character: CharacterEntity)
+    suspend fun update(character: UserEntity)
 
     @Delete
-    suspend fun delete(character: CharacterEntity)
+    suspend fun delete(character: UserEntity)
 
-    @Query("SELECT * FROM CharacterEntity WHERE id = :id")
-    suspend fun getCharacterById(id: String): CharacterEntity?
+    @Query("SELECT * FROM UserEntity WHERE id = :id")
+    suspend fun getCharacterById(id: Int): UserEntity?
 
-    @Query("SELECT * FROM CharacterEntity")
-    fun getAllCharacters(): Flow<List<CharacterEntity>>
+    @Query("SELECT * FROM UserEntity")
+    fun getAllCharacters(): Flow<List<UserEntity>>
 }

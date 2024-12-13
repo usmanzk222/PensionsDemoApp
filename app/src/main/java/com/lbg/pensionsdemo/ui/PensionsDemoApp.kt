@@ -16,7 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import java.util.Date
+import com.lbg.pensionsdemo.ui.greetings.GreetingsHome
 
 @Composable
 fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController = rememberNavController()) {
@@ -43,10 +43,11 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
             navigation( route = AppScreens.GREETINGS.route, startDestination = AppScreens.GREETINGS_HOME.route){
                 composable(AppScreens.GREETINGS_HOME.route) {
                     GreetingsHome(
-                        customerName = "Sarah",
-                        customerBirthdate = Date(1998 - 1900, 0, 1),
-                        navigateToLostPensionsScreen = { }
-                    )
+                        snackBarHostState,
+                        padding = paddingValues
+                    ){
+                        // navigate to lost pension screen
+                    }
                 }
             }
 

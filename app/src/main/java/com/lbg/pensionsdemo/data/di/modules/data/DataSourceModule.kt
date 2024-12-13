@@ -1,11 +1,11 @@
 package com.lbg.pensionsdemo.data.di.modules.data
 
-import com.lbg.pensionsdemo.data.local.IPensionsLocalDataSource
-import com.lbg.pensionsdemo.data.local.PensionsLocalDataSource
-import com.lbg.pensionsdemo.data.remote.IPensionsRemoteDataSource
-import com.lbg.pensionsdemo.data.remote.PensionsRemoteDataSource
-import com.lbg.pensionsdemo.data.repository.PensionsRepository
-import com.lbg.pensionsdemo.data.repository.IPensionsRepository
+import com.lbg.pensionsdemo.data.local.IUserLocalDataSource
+import com.lbg.pensionsdemo.data.local.UserLocalDataSource
+import com.lbg.pensionsdemo.data.remote.IUserRemoteDataSource
+import com.lbg.pensionsdemo.data.remote.UserRemoteDataSource
+import com.lbg.pensionsdemo.data.repository.IUsersRepository
+import com.lbg.pensionsdemo.data.repository.UsersRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,16 +18,16 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun provideCharacterLocalDataSource(dataSource: PensionsLocalDataSource): IPensionsLocalDataSource
+    abstract fun provideCharacterLocalDataSource(dataSource: UserLocalDataSource): IUserLocalDataSource
 
 
     @Binds
     @Singleton
-    abstract fun provideCharacterRemoteDataSource(dataSource: PensionsRemoteDataSource): IPensionsRemoteDataSource
+    abstract fun provideCharacterRemoteDataSource(dataSource: UserRemoteDataSource): IUserRemoteDataSource
 
     @Binds
     @Singleton
-    abstract fun provideCharacterRepository(dataSource: PensionsRepository): IPensionsRepository
+    abstract fun provideCharacterRepository(dataSource: UsersRepository): IUsersRepository
 
 
 

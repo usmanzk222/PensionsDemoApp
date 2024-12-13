@@ -45,19 +45,21 @@ import com.lbg.pensionsdemo.R
 import com.lbg.pensionsdemo.ui.greetings.GreetingsViewModel.GreetingsUIState
 import com.lbg.pensionsdemo.ui.model.UserUiModel
 import com.lbg.pensionsdemo.ui.theme.SWButton
+import com.lbg.pensionsdemo.ui.theme.SWLinkButton
 
 @Composable
 fun GreetingsHome(
     snackBarHostState: SnackbarHostState,
     padding: PaddingValues,
     viewModel: GreetingsViewModel = hiltViewModel(),
-    navigateToLostPensionsScreen: () -> Unit
+    navigateToLostPensionsScreen: () ->Unit,
+    navigateToHomeScreen: () -> Unit,
 ) {
     val greetingsUIState: GreetingsUIState by viewModel.uiState.collectAsStateWithLifecycle()
     when (greetingsUIState) {
         is GreetingsUIState.Success -> {
             val user = (greetingsUIState as GreetingsUIState.Success).user
-            GreetingsHomeContent(user, padding, navigateToLostPensionsScreen)
+            GreetingsHomeContent(user, padding, navigateToLostPensionsScreen, navigateToHomeScreen)
 
         }
 
@@ -114,7 +116,8 @@ fun shimmerBrush(): Brush {
 fun GreetingsHomeContent(
     user: UserUiModel,
     padding: PaddingValues,
-    navigateToLostPensionsScreen: () -> Unit
+    navigateToLostPensionsScreen: () -> Unit,
+    navigateToHomeScreen: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -133,7 +136,11 @@ fun GreetingsHomeContent(
         SWButton(
             onClick = navigateToLostPensionsScreen,
             buttonText = stringResource(R.string.lost_pensions_button),
-            modifier = Modifier.padding(horizontal = 32.dp)
+            modifier = Modifier.padding(top = 32.dp)
+        )
+        SWLinkButton(
+            onClick = navigateToHomeScreen,
+            buttonText = stringResource(R.string.not_now),
         )
     }
 }
@@ -194,6 +201,7 @@ fun LandingPagePreview() {
     GreetingsHomeContent(
         UserUiModel(1, "Usman", "usman@gmail.com", "22/02/1991", 34, "34th",2),
         padding = PaddingValues(24.dp),
-        navigateToLostPensionsScreen = { }
+        navigateToLostPensionsScreen = { },
+        navigateToHomeScreen = { },
     )
 }

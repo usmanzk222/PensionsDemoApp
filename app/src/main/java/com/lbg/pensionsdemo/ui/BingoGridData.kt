@@ -1,6 +1,5 @@
 package com.lbg.pensionsdemo.ui
 
-import androidx.compose.ui.res.stringResource
 import com.lbg.pensionsdemo.R
 
 data class GridItem(

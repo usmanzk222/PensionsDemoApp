@@ -25,6 +25,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,15 +44,19 @@ import com.lbg.pensionsdemo.ui.theme.Typography
 
 @Composable
 fun BingoScreen(
-    onCloseClicked: () -> Unit,
+    isRewardCardVisible: Boolean,
     navigateToBingoCellScreen: () -> Unit,
-    isRewardCardVisible: Boolean
+    onCloseClicked: () -> Unit,
 ) {
+
+    var showPiggyBank:Boolean by rememberSaveable { mutableStateOf(isRewardCardVisible) }
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        if (!isRewardCardVisible) {
+        if (!showPiggyBank) {
             // Regular UI when reward card is not visible
             Column(
                 modifier = Modifier
@@ -71,11 +79,13 @@ fun BingoScreen(
         }
 
         // Rewards card positioned at the very bottom
-        if (isRewardCardVisible) {
+        if (showPiggyBank) {
             RewardsCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-            )
+            ){
+                showPiggyBank = false
+            }
         }
     }
 }
@@ -260,13 +270,13 @@ fun TickCirclePreview() {
 @Preview(showBackground = true)
 @Composable
 fun BingoScreenWithRewardsPreview() {
-    BingoScreen({}, {}, true)
+    BingoScreen(true,{}, {})
 }
 
 @Preview(showBackground = false)
 @Composable
 fun BingoScreenPreview() {
-    BingoScreen({}, {}, false)
+    BingoScreen(false, {}, {})
 }
 
 @Preview(showBackground = false)

@@ -17,7 +17,7 @@ import com.lbg.pensionsdemo.R
 @Composable
 fun LandingPage(paddingValues: PaddingValues) {
     Image(
-        painter = painterResource(R.drawable.home),
+        painter = painterResource(R.drawable.home_screen),
         contentDescription = "Home background",
         modifier = Modifier
             .fillMaxSize()

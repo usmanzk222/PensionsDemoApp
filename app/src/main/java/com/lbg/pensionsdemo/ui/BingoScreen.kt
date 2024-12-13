@@ -53,15 +53,20 @@ fun BingoScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(24.dp)
             ) {
                 AppBarWithClose(onCloseClicked = onCloseClicked)
-                Spacer(modifier = Modifier.height(33.dp))
-                ScreenTitle(Modifier)
-                Spacer(modifier = Modifier.height(45.dp))
-                BingoGrid(navigateToBingoCellScreen)
-                Spacer(modifier = Modifier.height(13.dp))
-                SpeechBubble()
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(24.dp)
+                ) {
+                    Spacer(modifier = Modifier.height(33.dp))
+                    ScreenTitle(Modifier)
+                    Spacer(modifier = Modifier.height(45.dp))
+                    BingoGrid(navigateToBingoCellScreen)
+                    Spacer(modifier = Modifier.height(13.dp))
+                    SpeechBubble()
+                }
             }
         }
 
@@ -69,8 +74,7 @@ fun BingoScreen(
         if (isRewardCardVisible) {
             RewardsCard(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter) // Align to the bottom of the screen
-                // Optional padding to give some space from the edges
+                    .align(Alignment.BottomCenter)
             )
         }
     }
@@ -225,7 +229,7 @@ fun SpeechBubble() {
     ) {
         Box {
             Image(
-                painter = painterResource(R.drawable.speech_bubblee),
+                painter = painterResource(R.drawable.speech_bubble),
                 contentDescription = "Cell Icon",
             )
         }

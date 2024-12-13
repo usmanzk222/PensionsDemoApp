@@ -37,7 +37,7 @@ fun PensionsDemoApp(navigationTarget: String?, navController: NavHostController 
         NavHost(navController = navController, startDestination = AppScreens.LANDING.route) {
             composable(AppScreens.LANDING.route) {
               //  LandingPage(paddingValues)
-                BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {}, true)
+                BingoScreen(onCloseClicked = {}, navigateToBingoCellScreen = {}, false)
             }
 
             navigation( route = AppScreens.GREETINGS.route, startDestination = AppScreens.GREETINGS_HOME.route){

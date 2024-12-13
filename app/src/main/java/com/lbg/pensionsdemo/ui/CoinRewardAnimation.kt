@@ -37,7 +37,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
 import com.lbg.pensionsdemo.R
 import com.lbg.pensionsdemo.ui.theme.RewardCoinCard
 import com.lbg.pensionsdemo.ui.theme.RewardCoinCardLighter
@@ -152,9 +151,8 @@ fun UserProfileCircle() {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(R.drawable.eyeing_emoji), //todo switch to octopus icon
+                painter = painterResource(R.drawable.profile_vector),
                 contentDescription = "Profile Image",
-                modifier = Modifier.padding(2.dp)
             )
         }
     }

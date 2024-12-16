@@ -234,8 +234,6 @@ fun SpeechBubble() {
     Box(
         modifier = Modifier
             .padding(start = 93.dp)
-            .height(46.dp)
-            .width(232.dp)
     ) {
         Box {
             Image(
@@ -245,7 +243,7 @@ fun SpeechBubble() {
         }
         Text(
             text = stringResource(R.string.one_away_from_unlocking),
-            style = Typography.bodySmall,
+            style = Typography.labelSmall,
             modifier = Modifier
                 .padding(top = 20.dp, bottom = 14.dp, start = 18.dp)
         )

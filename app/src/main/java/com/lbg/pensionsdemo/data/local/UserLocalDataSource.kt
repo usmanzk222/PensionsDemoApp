@@ -9,7 +9,7 @@ import javax.inject.Inject
 class UserLocalDataSource @Inject constructor(private val characterDao: PensionsDao) :
     IUserLocalDataSource {
 
-    override suspend fun getUser(): UserEntity? = characterDao.getCharacterById(1)
+    override suspend fun getUser(): UserEntity? = characterDao.getFirstUser()
 
 
     override suspend fun insertUser(characters: UserEntity) {

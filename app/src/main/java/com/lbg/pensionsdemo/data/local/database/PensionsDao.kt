@@ -23,6 +23,9 @@ interface PensionsDao {
     @Delete
     suspend fun delete(character: UserEntity)
 
+    @Query("SELECT * FROM UserEntity LIMIT 1")
+    suspend fun getFirstUser(): UserEntity?
+
     @Query("SELECT * FROM UserEntity WHERE id = :id")
     suspend fun getCharacterById(id: Int): UserEntity?
 

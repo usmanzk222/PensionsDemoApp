@@ -1,6 +1,9 @@
 package com.lbg.pensionsdemo.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.lbg.pensionsdemo.R
+import com.lbg.pensionsdemo.ui.theme.AppBackground
 import com.lbg.pensionsdemo.ui.theme.AppBarWithClose
 import com.lbg.pensionsdemo.ui.theme.TickCircle
 import com.lbg.pensionsdemo.ui.theme.Typography
@@ -51,10 +55,10 @@ fun BingoScreen(
 
     var showPiggyBank:Boolean by rememberSaveable { mutableStateOf(isRewardCardVisible) }
 
-
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(AppBackground),
     ) {
         if (!showPiggyBank) {
             // Regular UI when reward card is not visible
@@ -78,8 +82,12 @@ fun BingoScreen(
             }
         }
 
-        // Rewards card positioned at the very bottom
-        if (showPiggyBank) {
+        AnimatedVisibility(
+            visible = showPiggyBank,
+            exit = slideOutVertically { it }, // Animate slide out down
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+        ) {
             RewardsCard(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -233,7 +241,7 @@ fun TickCircle() {
 fun SpeechBubble() {
     Box(
         modifier = Modifier
-            .padding(start = 93.dp)
+            .padding(start = 60.dp)
     ) {
         Box {
             Image(

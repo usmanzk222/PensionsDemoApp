@@ -1,5 +1,6 @@
 package com.lbg.pensionsdemo.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -119,7 +121,11 @@ fun AppBarWithClose(onCloseClicked: () -> Unit) {
                 )
             }
         },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = AppBackground
+        ),
         modifier = Modifier.fillMaxWidth()
+            .background(AppBackground)
     )
 }
 

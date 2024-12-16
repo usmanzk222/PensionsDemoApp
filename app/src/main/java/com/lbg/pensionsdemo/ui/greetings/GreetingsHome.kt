@@ -29,7 +29,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +45,7 @@ import com.lbg.pensionsdemo.ui.greetings.GreetingsViewModel.GreetingsUIState
 import com.lbg.pensionsdemo.ui.model.UserUiModel
 import com.lbg.pensionsdemo.ui.theme.SWButton
 import com.lbg.pensionsdemo.ui.theme.SWLinkButton
+import com.lbg.pensionsdemo.ui.theme.Typography
 
 @Composable
 fun GreetingsHome(
@@ -136,7 +136,7 @@ fun GreetingsHomeContent(
         SWButton(
             onClick = navigateToLostPensionsScreen,
             buttonText = stringResource(R.string.see_how_we_can_help),
-            modifier = Modifier.padding(top = 32.dp)
+            modifier = Modifier.padding(top = 32.dp, start = 24.dp, end = 24.dp)
         )
         SWLinkButton(
             onClick = navigateToHomeScreen,
@@ -173,23 +173,22 @@ fun BirthdayMessage(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth().padding(horizontal = 36.dp),
+        modifier = modifier.fillMaxWidth().padding(horizontal = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(44.dp))
         Text(
             text = stringResource(R.string.birthday_message_heading, ageString, name),
             fontSize = 24.sp,
-            fontWeight = FontWeight.Medium,
+            style = Typography.headlineLarge,
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.birthday_message_body),
-            fontSize = 14.sp,
+            style = Typography.bodyLarge,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(8.dp)
         )
 
     }

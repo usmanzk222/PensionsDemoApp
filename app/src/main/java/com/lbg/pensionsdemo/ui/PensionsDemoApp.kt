@@ -39,7 +39,9 @@ fun PensionsDemoApp(
     ) { paddingValues ->
         NavHost(navController = navController, startDestination = AppScreens.LANDING.route) {
             composable(AppScreens.LANDING.route) {
-                LandingPage(paddingValues)
+                LandingPage(paddingValues = paddingValues) {
+                    navController.navigate(AppScreens.BINGO_HOME.route)
+                }
             }
 
             navigation(
@@ -72,7 +74,6 @@ fun PensionsDemoApp(
                     }
                 }
             }
-
         }
 
         LaunchedEffect(navigationTargetState) {

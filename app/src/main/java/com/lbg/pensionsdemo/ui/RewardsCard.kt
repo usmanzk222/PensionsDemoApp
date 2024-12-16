@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lbg.pensionsdemo.R
+import com.lbg.pensionsdemo.ui.theme.AppBackground
 import com.lbg.pensionsdemo.ui.theme.LoadLottieAnimation
 import com.lbg.pensionsdemo.ui.theme.SWButton
 
@@ -32,6 +34,10 @@ fun RewardsCard(modifier: Modifier,
         modifier = modifier
             .shadow(8.dp, shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp)),
         shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 0.dp, bottomEnd = 0.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = AppBackground
+        )
+
     ) {
         Column(
             modifier = Modifier

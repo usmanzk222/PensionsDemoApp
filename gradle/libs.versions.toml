@@ -2,6 +2,7 @@
 accompanistPlaceholderMaterial = "0.30.0"
 agp = "8.7.3"
 coilCompose = "2.2.2"
+constraintlayoutCompose = "1.1.0"
 converterGson = "2.9.0"
 dotlottieAndroid = "0.0.3"
 firebaseBomVersion = "33.7.0"
@@ -26,10 +27,12 @@ coreKtxVersion = "1.6.1"
 junitKtx = "1.2.1"
 turbine = "1.0.0"
 googleServices = "4.4.2"
+constraintlayout = "2.2.0"
 
 [libraries]
 accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanistPlaceholderMaterial" }
 android-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieComposeVersion" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
@@ -67,6 +70,7 @@ androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", nam
 core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

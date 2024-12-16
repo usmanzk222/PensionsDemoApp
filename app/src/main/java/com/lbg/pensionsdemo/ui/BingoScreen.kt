@@ -46,6 +46,7 @@ import com.lbg.pensionsdemo.ui.theme.AppBarWithClose
 import com.lbg.pensionsdemo.ui.theme.TickCircle
 import com.lbg.pensionsdemo.ui.theme.Typography
 
+const val BINGO_NAV_DATA_KEY = "bingoNavData"
 @Composable
 fun BingoScreen(
     isRewardCardVisible: Boolean,

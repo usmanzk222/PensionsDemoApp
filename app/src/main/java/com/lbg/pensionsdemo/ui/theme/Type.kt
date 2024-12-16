@@ -36,6 +36,13 @@ val Typography = Typography(
         color = Color(0xFF000000),
         fontWeight = FontWeight(400),
         textAlign = TextAlign.Center,
+    ),
+    labelSmall = TextStyle(
+        fontSize = 14.sp,
+        fontFamily = FontFamily.Default,
+        color = Color(0xFF000000),
+        fontWeight = FontWeight(400),
+        textAlign = TextAlign.Center,
     )
 )
 

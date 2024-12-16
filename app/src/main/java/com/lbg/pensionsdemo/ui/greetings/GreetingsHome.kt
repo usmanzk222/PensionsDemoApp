@@ -135,7 +135,7 @@ fun GreetingsHomeContent(
         Spacer(modifier = Modifier.weight(1f))
         SWButton(
             onClick = navigateToLostPensionsScreen,
-            buttonText = stringResource(R.string.lost_pensions_button),
+            buttonText = stringResource(R.string.see_how_we_can_help),
             modifier = Modifier.padding(top = 32.dp)
         )
         SWLinkButton(

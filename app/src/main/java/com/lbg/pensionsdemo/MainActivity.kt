@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        navigationTargetState = intent?.getStringExtra("NAVIGATION_TARGET")
+        navigationTargetState = intent?.getStringExtra("navigation_target")
         Log.e("OnCreate: Notification", "data: $navigationTargetState")
 
         setContent {

@@ -40,7 +40,11 @@ fun PensionsDemoApp(
         NavHost(navController = navController, startDestination = AppScreens.LANDING.route) {
             composable(AppScreens.LANDING.route) {
                 LandingPage(paddingValues = paddingValues) {
-                    navController.navigate(AppScreens.BINGO_HOME.route)
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        key = BINGO_NAV_DATA_KEY,
+                        value = false
+                    )
+                    navController.navigate(AppScreens.BINGO.route)
                 }
             }
 
@@ -64,13 +68,15 @@ fun PensionsDemoApp(
                 startDestination = AppScreens.BINGO_HOME.route
             ) {
                 composable(AppScreens.BINGO_HOME.route) {
-                    BingoScreen(isRewardCardVisible = true, navigateToBingoCellScreen = {}) {
+                    val isRewardCardVisible =
+                        navController.previousBackStackEntry?.savedStateHandle?.get<Boolean>(
+                            BINGO_NAV_DATA_KEY
+                        ) ?: true
+
+                    BingoScreen(
+                        isRewardCardVisible = isRewardCardVisible,
+                        navigateToBingoCellScreen = {}) {
                         navController.navigateToHome(true)
-                    }
-                    composable(route = AppScreens.BINGO_BOARD.route) {
-                        BingoScreen(isRewardCardVisible = false, navigateToBingoCellScreen = {}) {
-                            navController.navigate(AppScreens.LANDING.route)
-                        }
                     }
                 }
             }
@@ -85,9 +91,9 @@ fun PensionsDemoApp(
     }
 }
 
-fun NavHostController.navigateToHome(popBackStack: Boolean){
-    navigate(AppScreens.LANDING.route){
-        popUpTo(AppScreens.LANDING.route){
+fun NavHostController.navigateToHome(popBackStack: Boolean) {
+    navigate(AppScreens.LANDING.route) {
+        popUpTo(AppScreens.LANDING.route) {
             inclusive = popBackStack
         }
     }

@@ -78,6 +78,7 @@ dependencies {
     implementation libs.androidx.room.runtime
     implementation libs.androidx.lifecycle.runtime.compose.android
     implementation libs.core.ktx
+    implementation(libs.androidx.constraintlayout.compose)
     kapt libs.androidx.room.compiler
     implementation libs.androidx.room.ktx
 
